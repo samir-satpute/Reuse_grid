@@ -1,0 +1,36 @@
+table {
+    border: 2px solid black;
+    overflow: auto;
+    width: 100%;
+}
+#tablediv{
+    background-color: floralwhite;
+    overflow-x: auto;
+    overflow-y: auto;
+    border: 2px solid blue;
+    height:400px;
+}
+#pagerownum{
+    float: right;
+}
+th {
+    background-color:gainsboro;
+    font-weight: bold;
+    padding: 10px;
+    text-align: center;
+    border: 1px solid black;
+}
+td {
+    padding: 10px;
+    text-align: center;
+    border: 1px solid black;
+    height: 50px;
+ }
+a {
+    cursor: pointer;
+}
+
+
+/* body{
+    background-color: aqua;
+} */

@@ -1,0 +1,56 @@
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<!-- Bootstrap library added -->
+<body>
+    <div class="col-sm-3">
+        <button (click)="getEmployee('abc')">Get All Employee</button>
+    </div>
+    <div class="col-sm-7" id="tablediv">
+        <div class="search-container" id="search-container">
+            <input (keyup)="onSearchKey($event)" [hidden]="!searchFlag"  placeholder="Search..">
+            <div id="pagerownum" [hidden]="!rowperpageFlag">
+                <label>Select Row per page</label>
+                <select #t (change)="selectrowperpage(t.value)">
+                    <option [value]="5">5</option>
+                    <option [value]="10">10</option>
+                    <option [value]="15">15</option>
+                    <option [value]="20">20</option>
+                </select>
+            </div>
+        </div>
+        <div>
+            <table id="mytable" class="row-border table table-hover ">
+                <thead>
+                    <tr>
+                        <th [hidden]="flag" *ngFor="let keyname of keyname" (click)="sortHeaderAsc(keyname)">{{keyname}}<p>&#8593;</p></th>
+                        <th [hidden]="!flag" *ngFor="let keyname of keyname" (click)="sortHeaderDesc(keyname)">{{keyname}}<p>&#8595;</p></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let oneemployee of pagedItems">
+                        <td *ngFor="let keyname of  keyname">{{oneemployee[keyname]}}</td>
+                </tbody>
+            </table>
+        </div>
+        <div [hidden]="!pagedivFlag">
+            <ul *ngIf="pager.pages && pager.pages.length" class="pagination">
+                <li [ngClass]="{disabled:pager.currentPage === 1}">
+                    <a (click)="setPage(1,t.value)">First</a>
+                </li>
+                <li [ngClass]="{disabled:pager.currentPage === 1}">
+                    <a (click)="setPage(pager.currentPage - 1,t.value)">Previous</a>
+                </li>
+                <li *ngFor="let page of pager.pages" [ngClass]="{active:pager.currentPage === page}">
+                    <a (click)="setPage(page,(t.value))">{{page}}</a>
+                </li>
+                <li [ngClass]="{disabled:pager.currentPage === pager.totalPages}">
+                    <a (click)="setPage(pager.currentPage + 1,t.value)">Next</a>
+                </li>
+                <li [ngClass]="{disabled:pager.currentPage === pager.totalPages}">
+                    <a (click)="setPage(pager.totalPages,t.value)">Last</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</body>
